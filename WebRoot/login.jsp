@@ -19,7 +19,10 @@ String path = request.getContextPath();
 		#header{height:70px; width:100%; margin:0 auto; background:url(/jtcw/images/bg.png) repeat-x 100px -10px;}
 		#login{width:380px; margin:100px auto;}
 		.l-t1{background:url(/jtcw/images/bgpic1.gif) no-repeat -12px -56px; height:10px;font-family: 微软雅黑}
-		.l-main{background:url(/jtcw/images/login-middle.gif) repeat-y -2px; height:200px;font-family: 微软雅黑}
+		.l-main{background:url(/jtcw/images/login-middle.gif) repeat-y -2px; height:200px;font-family: 微软雅黑;padding: 20px;
+            border: 1px #d8d3d3 solid;
+            border-radius: 5px;
+            background-color: aliceblue;}
 		.l-b1{background:url(/jtcw/images/bgpic1.gif) no-repeat -12px -82px; height:10px;font-family: 微软雅黑}
 		.l-ico{background:url(/jtcw/images/bgpic1.gif) no-repeat -250px -110px; padding-left:55px; font-size:14px; font-weight:bold;font-family: 微软雅黑}
 		.l-text1{font-size:12px; padding-left:50px;font-family: 微软雅黑}
