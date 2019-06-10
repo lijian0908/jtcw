@@ -28,7 +28,7 @@
 			<!-- ?useUnicode=true&amp;amp;amp;amp;amp;amp;characterEncoding=utf-8- -->
 		</property>
 		<property name="username" value="root"></property>
-		<property name="password" value=""></property>
+		<property name="password" value="123456"></property>
 	</bean>
 	
 	<bean id="sessionFactory"
