@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="jtcw"
+  id="myeclipse.1437537971848"
+  context-root="/jtcw"
+  j2ee-spec="5.0"
+  archive="jtcw.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
