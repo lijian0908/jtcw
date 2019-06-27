@@ -33,6 +33,7 @@ String path = request.getContextPath();
       <c:if test="${sessionScope.userType==0}"> 
 	      <li><a href="<%=path %>/admin/userinfo/userPw.jsp" target="right1111" style="font-family: 微软雅黑">修改登陆密码</a></li>
 	      <li><a href="<%=path %>/userMana.action" target="right1111" style="font-family: 微软雅黑">注册信息管理</a></li>
+          <li><a href="<%=path %>/fiList.action" target="right1111" style="font-family: 微软雅黑">理财产品维护</a></li>
 	  </c:if>
 	  <c:if test="${sessionScope.userType==2}"> 
 	      <li><a href="<%=path %>/orderMine.action" target="right1111" style="font-family: 微软雅黑">我的订单信息</a></li>
@@ -76,7 +77,7 @@ String path = request.getContextPath();
   </div>
   
   <div>
-      <iframe src="<%=path %>/admin/right.jsp" width="70%" height="480" name="right1111" frameborder="0" scrolling="auto"></iframe></td>
+      <iframe src="<%=path %>/admin/right.jsp" width="70%" height="600" name="right1111" frameborder="0" scrolling="auto"></iframe></td>
   </div>
 </div>
 

@@ -43,10 +43,14 @@
 					org.hibernate.dialect.MySQLDialect
 				</prop>
 				<prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://cdb-1tr98sga.bj.tencentcdb.com:10130/db_xf</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
 			</props>
 		</property>
 		<property name="mappingResources">
 			<list>
+				<value>com/model/FinancialEntity.hbm.xml</value>
+				<value>com/model/FinancialRaltionEntity.hbm.xml</value>
 			    <value>com/model/TAdmin.hbm.xml</value>
 			    <value>com/model/TUser.hbm.xml</value>
 			    <value>com/model/TShouru.hbm.xml</value>
@@ -172,4 +176,22 @@
 			<ref bean="TJiehuanDAO" />
 		</property>
 	</bean>
+
+	<bean id="financialEntityDAO" class="com.dao.FinancialEntityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="financialEntityAction" class="com.action.FinancialEntityAction" scope="prototype">
+		<property name="financialEntityDAO">
+			<ref bean="financialEntityDAO" />
+		</property>
+	</bean>
+
+	<bean id="financialEntityRelationDAO" class="com.dao.FinancialEntityRelationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
 	</beans>

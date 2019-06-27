@@ -85,5 +85,19 @@
         </action>
         <action name="huan" class="jiehuanAction" method="huan">
         </action>
+
+        <action name="fiSaveOrUpdate" class="financialEntityAction" method="saveOrUpdate">
+            <result name="success" type="chain">fiList</result>
+        </action>
+        <action name="fiList" class="financialEntityAction" method="list">
+            <result name="success">/admin/FinancialEntity/FinancialEntity.jsp</result>
+        </action>
+        <action name="fiGetById" class="financialEntityAction" method="getById">
+            <result name="success">/admin/FinancialEntity/FInancialAdd.jsp</result>
+        </action>
+        <action name="fielete" class="financialEntityAction" method="delete">
+            <result name="success" type="chain">fiList</result>
+        </action>
+
     </package>
 </struts>

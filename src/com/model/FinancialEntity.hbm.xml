@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.model.FinancialEntity" table="financial" schema="db_xf">
+        <id name="id" column="id"/>
+        <property name="financialName" column="financial_name"/>
+        <property name="financialCode" column="financial_code"/>
+        <property name="financialDescribe" column="financial_describe"/>
+        <property name="financialSource" column="financial_source"/>
+        <property name="financialPrice" column="financial_price"/>
+        <property name="financialMaxPrice" column="financial_max_price"/>
+        <property name="financialIfSale" column="financial_if_sale"/>
+        <property name="financialUnit" column="financial_unit"/>
+        <property name="financialLevel" column="financial_level"/>
+        <property name="createTime" column="create_time"/>
+        <property name="updateTime" column="update_time"/>
+    </class>
+</hibernate-mapping>

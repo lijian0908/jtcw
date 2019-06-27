@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.model.FinancialRaltionEntity" table="financial_raltion" schema="db_xf">
+        <id name="id" column="id"/>
+        <property name="financialCode" column="financial_code"/>
+        <property name="userId" column="user_id"/>
+        <property name="financialPrice" column="financial_price"/>
+        <property name="financialUnit" column="financial_unit"/>
+        <property name="financialCopies" column="financial_ copies"/>
+        <property name="createTime" column="create_time"/>
+        <property name="updateTime" column="update_time"/>
+        <one-to-one name="financial" class="com.model.FinancialEntity"/>
+    </class>
+</hibernate-mapping>
