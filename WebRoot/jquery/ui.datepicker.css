@@ -206,3 +206,6 @@ img.datepicker_trigger {
     width: 200px; /*must have*/
     height: 200px; /*must have*/
 }
+.container{
+	float: left;
+}

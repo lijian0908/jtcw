@@ -6,7 +6,8 @@
      
      
 <struts>
-    <package name="liu" extends="struts-default">
+    <package name="liu" extends="struts-default,json-default">
+
         <global-results>
             <result name="succeed">/common/succeed.jsp</result>
             <result name="msg">/common/msg.jsp</result>
@@ -58,8 +59,10 @@
         </action>
         
         
-        <action name="tongjiRes" class="tongjiAction" method="tongjiRes">
-             <result name="success">/auser/tongji/tongjiRes.jsp</result>
+        <action name="tongjiRes" class="tongjiAction" method="shouzhi">
+            <result type="json">
+                <param name="root">root</param>
+            </result>
         </action>
         
         
@@ -98,6 +101,18 @@
         <action name="fielete" class="financialEntityAction" method="delete">
             <result name="success" type="chain">fiList</result>
         </action>
+        <action name="fiRecommend" class="financialEntityAction" method="recommend">
+            <result name="success">/auser/FinancialEntity/FinancialEntity.jsp</result>
+        </action>
+        <action name="fiOrder" class="financialEntityAction" method="getOrder">
+            <result name="success">/auser/FinancialEntity/FInancialBuy.jsp</result>
+        </action>
+
+
+        <action name="order" class="orderAction" method="saveOrUpdate">
+            <result name="success">/auser/FinancialEntity/alipay.trade.page.pay.jsp</result>
+        </action>
+
 
     </package>
 </struts>

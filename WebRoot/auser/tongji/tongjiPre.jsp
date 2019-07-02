@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="org.apache.struts2.ServletActionContext" %>
 <%@ page isELIgnored="false" %> 
 
 <%
@@ -19,82 +20,168 @@ String path = request.getContextPath();
 	
 		<script src="<%=path %>/jquery/jquery-1.2.6.js" type="text/javascript" charset="utf-8"></script>	
 		<script src="<%=path %>/jquery/ui.datepicker.js" type="text/javascript" charset="utf-8"></script>	
-		<script src="<%=path %>/jquery/ui.datepicker-zh-CN.js" type="text/javascript" charset="utf-8"></script>	
-        
-        <script language="javascript">
-            function check()
-            {
-                if(document.formAdd.shijian1.value=="")
-                {
-                    alert("请输入开始时间");
-                    return false;
-                }
-                if(document.formAdd.shijian2.value=="")
-                {
-                    alert("请输入结束时间");
-                    return false;
-                }
-                
-                document.formAdd.submit();
-            }
-            
-            jQuery(function($){
-			$('#datepicker1').datepicker({
-					yearRange: '1900:2099', //取值范围.
-					showOn: 'both', //输入框和图片按钮都可以使用日历控件。
-					buttonImage: '<%=path %>/jquery/calendar.gif', //日历控件的按钮
-					buttonImageOnly: true,
-					showButtonPanel: true
-				});	
-				
-			});
-			
-			jQuery(function($){
-			$('#datepicker2').datepicker({
-					yearRange: '1900:2099', //取值范围.
-					showOn: 'both', //输入框和图片按钮都可以使用日历控件。
-					buttonImage: '<%=path %>/jquery/calendar.gif', //日历控件的按钮
-					buttonImageOnly: true,
-					showButtonPanel: true
-				});	
-				
-			});
-			
-        </script>
-	</head>
+		<script src="<%=path %>/jquery/ui.datepicker-zh-CN.js" type="text/javascript" charset="utf-8"></script>
 
+		<script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+		<script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com.cn/highcharts/modules/oldie.js"></script>
+		<script src="https://code.highcharts.com.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+	<style type="text/css">
+		.container{
+			float: left;
+			width: 500px;
+		}
+	</style>
+
+	</head>
 	<body leftmargin="2" topmargin="9" background='<%=path %>/img/allbg.gif'>
-			<form action="<%=path %>/tongjiRes.action" name="formAdd" method="post">
-				     <table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
-						<tr bgcolor="#E7E7E7">
-							<td height="14" colspan="3" background="<%=path %>/img/tbg.gif">&nbsp;&nbsp;</td>
-						</tr>
-						<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='red';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22">
-						    <td width="10%" bgcolor="#FFFFFF" align="right">
-						          开始时间：
-						    </td>
-						    <td width="90%" bgcolor="#FFFFFF" align="left">
-						       <input type="text" id="datepicker1" name="shijian1" value="" style="width: 200px;" readonly="readonly"/>
-						    </td>
-						</tr>
-						<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='red';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22">
-						    <td width="10%" bgcolor="#FFFFFF" align="right">
-						         结束时间：
-						    </td>
-						    <td width="90%" bgcolor="#FFFFFF" align="left">
-						       <input type="text" id="datepicker2" name="shijian2" value="" style="width: 200px;" readonly="readonly"/>
-						    </td>
-						</tr>
-						<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='red';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22">
-						    <td width="10%" bgcolor="#FFFFFF" align="right">
-						        &nbsp;
-						    </td>
-						    <td width="90%" bgcolor="#FFFFFF" align="left">
-						       <input type="button" value="提交" onclick="check()"/>&nbsp; 
-						       <input type="reset" value="重置"/>&nbsp;
-						    </td>
-						</tr>
-					 </table>
-			</form>
+	<div style="margin: 30px" width="10%" >
+		选择年份： <select id="se">
+					<option value ="2025">2025</option>
+					<option value ="2024">2024</option>
+					<option value="2023">2023</option>
+					<option value="2022">2022</option>
+					<option value="2021">2021</option>
+					<option value="2020">2020</option>
+					<option value="2019" selected>2019</option>
+					<option value="2018">2018</option>
+					<option value="2017">2017</option>
+					<option value="2016">2016</option>
+					<option value="2015">2015</option>
+					<option value="2014">2014</option>
+					<option value="2013">2013</option>
+					<option value="2012">2012</option>
+					<option value="2011">2011</option>
+					<option value="2010">2010</option>
+				</select>
+	</div>
+	<div class="container"> <div id="container1" style="max-width:500px;height:400px"></div></div>
+	<div class="container"> <div id="container2" style="max-width:500px;height:400px"></div></div>
+	<div id="container" style="min-width:400px;height:400px"></div>
+	<script>
+
+        $(document).ready(function(){
+            var chart  =  null
+			var chart1 = null
+			a();
+            $("#se").change(function () {
+				a();
+            })
+			function a(){
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    async: false,
+					data:{"year": $("#se").children('option:selected').val()},
+                    url: "${contextPath}/tongjiRes.action",
+                    success : function(data){
+                        chart = new Highcharts.chart('container', {
+                            chart: {
+                                type: 'line'
+                            },
+                            title: {
+                                text: '月收支分析'
+                            },
+                            subtitle: {
+                                text: ''
+                            },
+                            xAxis: {
+                                categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+                            },
+                            yAxis: {
+                                title: {
+                                    text: '人民币（¥）'
+                                }
+                            },
+                            plotOptions: {
+                                line: {
+                                    dataLabels: {
+                                        // 开启数据标签
+                                        enabled: true
+                                    },
+                                    // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+                                    enableMouseTracking: false
+                                }
+                            },
+                            series: [{
+                                name: '收入',
+                            }, {
+                                name: '支出',
+                            }]
+                        });
+                        data = eval('('+data+')')
+                        chart.series[0].setData(data.shouList);
+                        chart.series[1].setData(data.zhiList) ;
+
+                        $("#container1").highcharts({
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false,
+                                type: 'pie'
+                            },
+                            title: {
+                                text: '收入占比'
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: false
+                                    },
+                                    showInLegend: true
+                                }
+                            },
+                            series: [{
+                                name: '收入占比',
+                                colorByPoint: true,
+                                data:data.shouru2
+                            }]
+                        });
+
+                        $("#container2").highcharts({
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false,
+                                type: 'pie'
+                            },
+                            title: {
+                                text: '支出占比'
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                        style: {
+                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                        }
+                                    }
+                                }
+                            },
+                            series: [{
+                                name: '支出占比',
+                                colorByPoint: true,
+                                data:data.xiaofei2
+                            }]
+                        });
+
+
+                    }
+                })
+			}
+
+		})
+	</script>
    </body>
 </html>

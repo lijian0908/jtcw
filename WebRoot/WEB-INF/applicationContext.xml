@@ -43,9 +43,9 @@
 					org.hibernate.dialect.MySQLDialect
 				</prop>
 				<prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.connection.url">jdbc:mysql://cdb-1tr98sga.bj.tencentcdb.com:10130/db_xf</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://cdb-1tr98sga.bj.tencentcdb.com:10130</prop>
                 <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
-			</props>
+            </props>
 		</property>
 		<property name="mappingResources">
 			<list>
@@ -58,7 +58,10 @@
 			    <value>com/model/TTouzi.hbm.xml</value>
 			    <value>com/model/TKa.hbm.xml</value>
 			    <value>com/model/TJiehuan.hbm.xml</value>
-			</list>
+                <value>com/model/FlowEntity.hbm.xml</value>
+                <value>com/model/OrdersEntity.hbm.xml</value>
+                <value>com/model/UserWeightEntity.hbm.xml</value>
+            </list>
 		</property>
 	</bean>
 	
@@ -186,9 +189,33 @@
 		<property name="financialEntityDAO">
 			<ref bean="financialEntityDAO" />
 		</property>
+		<property name="userWeightDAO">
+			<ref bean="userWeightDAO"/>
+		</property>
 	</bean>
 
 	<bean id="financialEntityRelationDAO" class="com.dao.FinancialEntityRelationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="orderAction" class="com.action.orderAction" scope="prototype">
+		<property name="ordersEntityDAO">
+			<ref bean="ordersEntityDAO" />
+		</property>
+		<property name="financialEntityDAO">
+			<ref bean="financialEntityDAO" />
+		</property>
+	</bean>
+
+	<bean id="ordersEntityDAO" class="com.dao.OrdersEntityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="userWeightDAO" class="com.dao.UserWeightDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

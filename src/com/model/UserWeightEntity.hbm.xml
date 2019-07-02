@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.model.UserWeightEntity" table="user_weight" schema="db_xf">
+        <id name="id" column="id"/>
+        <property name="userId" column="userId"/>
+        <property name="aweight" column="Aweight"/>
+        <property name="bweight" column="Bweight"/>
+        <property name="cweight" column="Cweight"/>
+        <property name="dweight" column="Dweight"/>
+    </class>
+</hibernate-mapping>

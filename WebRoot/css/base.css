@@ -286,3 +286,7 @@ border:1px solid #ffffff;
 	background:#F9FFE6;
 	padding:6px;
 }
+.container{
+    width: 500px;
+    float: left;
+}

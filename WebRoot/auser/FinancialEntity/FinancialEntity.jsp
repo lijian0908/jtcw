@@ -14,24 +14,12 @@ String path = request.getContextPath();
 		<meta http-equiv="description" content="This is my page" />
 
 		<link rel="stylesheet" type="text/css" href="<%=path %>/css/base.css" />
-		
-        <script language="javascript">
-           function del(id)
-           {
-               if(confirm('您确定删除吗？'))
-               {
-                   window.location.href="<%=path %>/fielete.action?financialEntity.id="+id;
-               }
-           }
-           function editPre(id)
-           {
-                   window.location.href="<%=path %>/fiGetById.action?financialEntity.id="+id;
-           }
-           function financial() {
-               var url="<%=path %>/admin/FinancialEntity/FInancialBuy.jsp";
-               window.location.href=url;
-           }
-       </script>
+		<script language="javascript">
+            function goPay(id)
+            {
+                window.location.href="<%=path %>/fiOrder.action?financialEntity.id="+id;
+            }
+		</script>
 	</head>
 
 	<body leftmargin="2" topmargin="2" background='<%=path %>/img/allbg.gif'>
@@ -91,19 +79,12 @@ String path = request.getContextPath();
 						<s:property value="#financialEntity.updateTime"/>
 					</td>
 					<td bgcolor="#FFFFFF" align="center">
-						<a href="#" onclick="del(<s:property value="#financialEntity.id"/>)" class="pn-loperator">删除</a>
-						<a href="#" onclick="editPre(<s:property value="#financialEntity.id"/>)" class="pn-loperator"> 修改</a>
+						<a href="#" onclick="goPay(<s:property value="#financialEntity.id"/>)" class="pn-loperator">购买</a>
 					</td>
 				</tr>
 				</s:iterator>
 			</table>
 
-			<table width='98%'  border='0'style="margin-top:8px;margin-left: 8px;">
-				<tr>
-					<td>
-						<input type="button" value="添加基金" style="width: 123px;" onclick="financial()" />
-					</td>
-				</tr>
-			</table>
+
 	</body>
 </html>

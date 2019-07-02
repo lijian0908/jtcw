@@ -42,7 +42,7 @@ String path = request.getContextPath();
 	      <li><a href="<%=path %>/auser/tongji/tongjiPre.jsp" target="right1111" style="font-family: 微软雅黑">收支分析模块</a></li>
 	      <li><a href="<%=path %>/kaMana.action" target="right1111" style="font-family: 微软雅黑">银行存储模块</a></li>
 	      <li><a href="<%=path %>/jiehuanMana.action" target="right1111" style="font-family: 微软雅黑">借钱还钱模块</a></li>
-          <li><a href="<%=path %>/jiehuanMana.action" target="right1111" style="font-family: 微软雅黑">理财产品模块</a></li>
+          <li><a href="<%=path %>/fiRecommend.action" target="right1111" style="font-family: 微软雅黑">理财产品推荐</a></li>
 	  </c:if>
     </ul>
   </div>
@@ -84,7 +84,7 @@ String path = request.getContextPath();
   </div>
   
   <div>
-      <iframe src="<%=path %>/admin/right.jsp" width="70%" height="480" name="right1111" frameborder="0" scrolling="auto"></iframe></td>
+      <iframe src="<%=path %>/admin/right.jsp" width="70%" height="1000" name="right1111" frameborder="0" scrolling="auto"></iframe></td>
   </div>
 </div>
 

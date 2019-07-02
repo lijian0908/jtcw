@@ -34,4 +34,8 @@ public class FinancialEntityDAO extends HibernateDaoSupport {
     public void delete(FinancialEntity financialEntity){
         getHibernateTemplate().delete(financialEntity);
     }
+
+    public List findByWeight(int length,String level){
+        return getHibernateTemplate().find("from FinancialEntity where financialLevel = '"+level+"' order by rand()").subList(0,length);
+    }
 }

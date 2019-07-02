@@ -1,10 +1,17 @@
 package com.action;
 
 import com.dao.FinancialEntityDAO;
+import com.dao.UserWeightDAO;
 import com.model.FinancialEntity;
+import com.model.OrdersEntity;
+import com.model.TUser;
+import com.model.UserWeightEntity;
 import com.opensymphony.xwork2.ActionSupport;
+import com.util.Util;
 import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +27,12 @@ public class FinancialEntityAction extends ActionSupport {
     private FinancialEntity financialEntity;
 
     private FinancialEntityDAO financialEntityDAO;
+
+    private UserWeightDAO userWeightDAO;
+
+    public void setUserWeightDAO(UserWeightDAO userWeightDAO) {
+        this.userWeightDAO = userWeightDAO;
+    }
 
     public void setFinancialEntityDAO(FinancialEntityDAO financialEntityDAO) {
         this.financialEntityDAO = financialEntityDAO;
@@ -96,4 +109,53 @@ public class FinancialEntityAction extends ActionSupport {
         }
         return ActionSupport.SUCCESS;
     }
+
+    public String recommend(){
+        HttpServletRequest req=ServletActionContext.getRequest();
+        HttpSession sess=req.getSession();
+        TUser user=(TUser)sess.getAttribute("user");
+
+        Map map = (Map) ServletActionContext.getContext().get("request");
+        List userWeightList = userWeightDAO.findByUserId(user.getUserId().longValue());
+        //因为只有一条
+        UserWeightEntity userWeightEntity;
+        if(userWeightList.size()>0){
+            userWeightEntity = (UserWeightEntity) userWeightList.get(0);
+        }else {
+            userWeightEntity = new UserWeightEntity();
+            userWeightEntity.setAweight(100);
+            userWeightEntity.setBweight(100);
+            userWeightEntity.setCweight(100);
+            userWeightEntity.setDweight(100);
+            userWeightEntity.setUserId(user.getUserId().longValue());
+            userWeightDAO.saveOrUpdate(userWeightEntity);
+        }
+        int sum = userWeightEntity.getAweight()+userWeightEntity.getBweight()+userWeightEntity.getCweight()+userWeightEntity.getDweight();
+        int a = userWeightEntity.getAweight()*20/ sum;
+        int b = userWeightEntity.getBweight()*20/ sum;
+        int c = userWeightEntity.getCweight()*20/ sum;
+        int d = userWeightEntity.getDweight()*20/ sum;
+
+        List lista = financialEntityDAO.findByWeight(a,"A");
+        List listb = financialEntityDAO.findByWeight(b,"B");
+        List listc = financialEntityDAO.findByWeight(c,"C");
+        List listd = financialEntityDAO.findByWeight(d,"D");
+        lista.addAll(listb);
+        lista.addAll(listc);
+        lista.addAll(listd);
+        map.put("list",lista);
+        return ActionSupport.SUCCESS;
+    }
+
+    public String getOrder(){
+        Map map = (Map) ServletActionContext.getContext().get("request");
+        OrdersEntity ordersEntity = new OrdersEntity();
+        FinancialEntity financialEntity1 = financialEntityDAO.findById(financialEntity.getId());
+        ordersEntity.setProduct(financialEntity1);
+        ordersEntity.setOrderNum(Util.getOrderIdByTime());
+        map.put("order",ordersEntity);
+        return ActionSupport.SUCCESS;
+    }
+
+
 }
