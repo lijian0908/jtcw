@@ -25,6 +25,7 @@ public class OrdersEntity {
     private Date createTime;
     private Date paidTime;
     private FinancialEntity product;
+    private String userId;
 
     @Id
     @Column(name = "id")
@@ -114,6 +115,16 @@ public class OrdersEntity {
 
     public void setPaidTime(Date paidTime) {
         this.paidTime = paidTime;
+    }
+
+    @Basic
+    @Column(name = "user_id")
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override

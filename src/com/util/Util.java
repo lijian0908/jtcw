@@ -52,6 +52,13 @@ public class Util {
 		return sdf.format(d);
 	}
 
+	public static String getDate(){
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		return sdf.format(date);
+	}
+
 	/**
 	 * ½«×Ö·û´®½Ø¶Ì£¬È¡Ç°n¸ö×Ö·û£¬Ó¢ÎÄËã°ë¸ö×Ö·û¡£
 	 * 

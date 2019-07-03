@@ -112,7 +112,11 @@
         <action name="order" class="orderAction" method="saveOrUpdate">
             <result name="success">/auser/FinancialEntity/alipay.trade.page.pay.jsp</result>
         </action>
-
-
+        <action name="notify_url" class="orderAction" method="payNotify">
+        </action>
+        <action name="return_url" class="orderAction" method="payReturn">
+        </action>
+        <action name="ifPay" class="orderAction" method="ifPay">
+        </action>
     </package>
 </struts>

@@ -33,4 +33,8 @@ public class OrdersEntityDAO extends HibernateDaoSupport {
     public void delete(OrdersEntity ordersEntity){
         getHibernateTemplate().delete(ordersEntity);
     }
+
+    public List findIfPay(){
+        return getHibernateTemplate().find("from OrdersEntity where orderStatus = '10'");
+    }
 }

@@ -14,5 +14,6 @@
         <property name="createTime" column="create_time"/>
         <property name="paidTime" column="paid_time"/>
         <one-to-one name="product" class="com.model.FinancialEntity"/>
+        <property name="userId" column="user_id"/>
     </class>
 </hibernate-mapping>

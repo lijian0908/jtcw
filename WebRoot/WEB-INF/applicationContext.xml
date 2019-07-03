@@ -221,4 +221,16 @@
 		</property>
 	</bean>
 
+	<bean id="myTimerTask" class="com.util.MyTimerTask" init-method="init">
+		<property name="ordersEntityDAO">
+			<ref bean="ordersEntityDAO" />
+		</property>
+		<property name="financialEntityDAO">
+			<ref bean="financialEntityDAO" />
+		</property>
+		<property name="touziDAO">
+			<ref bean="TTouziDAO" />
+		</property>
+	</bean>
+
 	</beans>
