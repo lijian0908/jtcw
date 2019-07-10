@@ -45,7 +45,7 @@
 				<prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.connection.url">jdbc:mysql://cdb-1tr98sga.bj.tencentcdb.com:10130</prop>
                 <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
-            </props>
+			</props>
 		</property>
 		<property name="mappingResources">
 			<list>
@@ -61,7 +61,8 @@
                 <value>com/model/FlowEntity.hbm.xml</value>
                 <value>com/model/OrdersEntity.hbm.xml</value>
                 <value>com/model/UserWeightEntity.hbm.xml</value>
-            </list>
+				<value>com/model/SubjectEntity.hbm.xml</value>
+			</list>
 		</property>
 	</bean>
 	
@@ -233,4 +234,17 @@
 		</property>
 	</bean>
 
+	<bean id="subjectDAO" class="com.dao.SubjectDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="subjectAction" class="com.action.SubjectAction">
+		<property name="subjectDAO">
+			<ref bean="subjectDAO"/>
+		</property>
+		<property name="userWeightDAO">
+			<ref bean="userWeightDAO"/>
+		</property>
+	</bean>
 	</beans>

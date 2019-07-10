@@ -54,6 +54,22 @@ String path = request.getContextPath();
 					<option value="2011">2011</option>
 					<option value="2010">2010</option>
 				</select>
+
+		选择月份： <select id="se1">
+		<option value ="01">一月</option>
+		<option value ="02">二月</option>
+		<option value="03">三月</option>
+		<option value="04">四月</option>
+		<option value="05">五月</option>
+		<option value="06">六月</option>
+		<option value="07" selected>七月</option>
+		<option value="08">八月</option>
+		<option value="09">九月</option>
+		<option value="10">十月</option>
+		<option value="11">十一月</option>
+		<option value="12">十二月</option>
+		</select>
+	</div>
 	</div>
 	<div class="container"> <div id="container1" style="max-width:500px;height:400px"></div></div>
 	<div class="container"> <div id="container2" style="max-width:500px;height:400px"></div></div>
@@ -67,12 +83,18 @@ String path = request.getContextPath();
             $("#se").change(function () {
 				a();
             })
+            $("#se1").change(function () {
+                a();
+            })
 			function a(){
                 $.ajax({
                     type: "POST",
                     dataType: "json",
                     async: false,
-					data:{"year": $("#se").children('option:selected').val()},
+					data:{
+                        "year": $("#se").children('option:selected').val(),
+						"month":$("#se1").children('option:selected').val()
+					},
                     url: "${contextPath}/tongjiRes.action",
                     success : function(data){
                         chart = new Highcharts.chart('container', {

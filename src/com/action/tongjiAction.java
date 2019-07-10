@@ -34,6 +34,11 @@ public class tongjiAction extends ActionSupport
     private String message;
 	private String path;
 	private String year;
+	private String month;
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
 
 	public void setYear(String year) {
 		this.year = year;
@@ -185,7 +190,7 @@ public class tongjiAction extends ActionSupport
 		if(year == null || "".equals(year)){
 			year = Util.getSysYear();
 		}
-		sql3.append(" and substring( shijian, 1, 4 ) ='"+year+"'");
+		sql3.append(" and substring( shijian, 1, 7 ) ='"+year+"-"+month+"'");
 		List<TShouru> shouRuRate =shouruDAO.getHibernateTemplate().find(sql3.toString());
 		Double sum = shouRuRate.stream().mapToDouble(TShouru::getJine).sum();
 
@@ -203,7 +208,7 @@ public class tongjiAction extends ActionSupport
 		if(year == null || "".equals(year)){
 			year = Util.getSysYear();
 		}
-		sql4.append(" and substring( shijian, 1, 4 ) ='"+year+"'");
+		sql4.append(" and substring( shijian, 1, 7 ) ='"+year+"-"+month+"'");
 		List<TXiaofei> xiaoFeiRate =shouruDAO.getHibernateTemplate().find(sql4.toString());
 		Double sum1 = xiaoFeiRate.stream().mapToDouble(TXiaofei::getJine).sum();
 

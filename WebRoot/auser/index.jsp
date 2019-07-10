@@ -42,7 +42,7 @@ String path = request.getContextPath();
 	      <li><a href="<%=path %>/auser/tongji/tongjiPre.jsp" target="right1111" style="font-family: 微软雅黑">收支分析模块</a></li>
 	      <li><a href="<%=path %>/kaMana.action" target="right1111" style="font-family: 微软雅黑">银行存储模块</a></li>
 	      <li><a href="<%=path %>/jiehuanMana.action" target="right1111" style="font-family: 微软雅黑">借钱还钱模块</a></li>
-          <li><a href="<%=path %>/fiRecommend.action" target="right1111" style="font-family: 微软雅黑">理财产品推荐</a></li>
+          <li><a href="<%=path %>/getSub.action" target="right1111" style="font-family: 微软雅黑">理财产品推荐</a></li>
 	  </c:if>
     </ul>
   </div>

@@ -118,5 +118,20 @@
         </action>
         <action name="ifPay" class="orderAction" method="ifPay">
         </action>
+
+        <action name="getSub" class="subjectAction" method="getSubject">
+            <result name="success">
+                /auser/subject/Subject.jsp
+            </result>
+            <result name="input" type="chain">
+                fiRecommend
+            </result>
+        </action>
+
+        <action name="setSub" class="subjectAction" method="setSub">
+            <result name="success" type="chain">
+                fiRecommend
+            </result>
+        </action>
     </package>
 </struts>
