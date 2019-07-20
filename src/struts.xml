@@ -107,6 +107,11 @@
         <action name="fiOrder" class="financialEntityAction" method="getOrder">
             <result name="success">/auser/FinancialEntity/FInancialBuy.jsp</result>
         </action>
+        <action name="fiDelWeight" class="financialEntityAction" method="deleteWeight">
+            <result name="success" type="chain">
+                getSub
+            </result>
+        </action>
 
 
         <action name="order" class="orderAction" method="saveOrUpdate">

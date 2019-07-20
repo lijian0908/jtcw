@@ -36,6 +36,11 @@ public class FinancialEntityDAO extends HibernateDaoSupport {
     }
 
     public List findByWeight(int length,String level){
-        return getHibernateTemplate().find("from FinancialEntity where financialLevel = '"+level+"' order by rand()").subList(0,length);
+        List list = getHibernateTemplate().find("from FinancialEntity where financialLevel = '"+level+"' order by rand()");
+
+        if(list.size()<length){
+            length = list.size();
+        }
+        return list.subList(0,length);
     }
 }

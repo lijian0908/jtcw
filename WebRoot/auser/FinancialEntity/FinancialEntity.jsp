@@ -19,6 +19,10 @@ String path = request.getContextPath();
             {
                 window.location.href="<%=path %>/fiOrder.action?financialEntity.id="+id;
             }
+            function replace(){
+                window.location.href="<%=path %>/fiDelWeight.action";
+			}
+
 		</script>
 	</head>
 
@@ -84,7 +88,13 @@ String path = request.getContextPath();
 				</tr>
 				</s:iterator>
 			</table>
-
+			<table width='98%'  border='0'style="margin-top:8px;margin-left: 8px;">
+				<tr>
+					<td>
+						<input type="button" value="重置推荐" style="width: 123px;" onclick="replace()" />
+					</td>
+				</tr>
+			</table>
 
 	</body>
 </html>

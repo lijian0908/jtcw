@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -136,14 +137,17 @@ public class FinancialEntityAction extends ActionSupport {
         int c = userWeightEntity.getCweight()*20/ sum;
         int d = userWeightEntity.getDweight()*20/ sum;
 
-        List lista = financialEntityDAO.findByWeight(a,"A");
-        List listb = financialEntityDAO.findByWeight(b,"B");
-        List listc = financialEntityDAO.findByWeight(c,"C");
-        List listd = financialEntityDAO.findByWeight(d,"D");
-        lista.addAll(listb);
-        lista.addAll(listc);
-        lista.addAll(listd);
-        map.put("list",lista);
+        List lista = a == 0?new ArrayList():financialEntityDAO.findByWeight(a,"A");
+        List listb = b == 0?new ArrayList():financialEntityDAO.findByWeight(b,"B");
+        List listc = c == 0?new ArrayList():financialEntityDAO.findByWeight(c,"C");
+        List listd = d == 0?new ArrayList():financialEntityDAO.findByWeight(d,"D");
+
+        List result = new ArrayList();
+        result.addAll(lista);
+        result.addAll(listb);
+        result.addAll(listc);
+        result.addAll(listd);
+        map.put("list",result);
         return ActionSupport.SUCCESS;
     }
 
@@ -155,7 +159,14 @@ public class FinancialEntityAction extends ActionSupport {
         ordersEntity.setOrderNum(Util.getOrderIdByTime());
         map.put("order",ordersEntity);
         return ActionSupport.SUCCESS;
+}
+
+    public String deleteWeight(){
+        HttpServletRequest req=ServletActionContext.getRequest();
+        HttpSession sess=req.getSession();
+        TUser user=(TUser)sess.getAttribute("user");
+        UserWeightEntity userWeightEntity = (UserWeightEntity)userWeightDAO.findByUserId(user.getUserId()).get(0);
+        userWeightDAO.delete(userWeightEntity);
+        return ActionSupport.SUCCESS;
     }
-
-
 }
